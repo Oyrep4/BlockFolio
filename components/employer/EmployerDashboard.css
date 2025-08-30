@@ -1,0 +1,264 @@
+.employer-dashboard {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.dashboard-header {
+  margin-bottom: 2rem;
+  text-align: center;
+  position: relative;
+}
+
+.dashboard-header h1 {
+  color: #24292e;
+  font-size: 2rem;
+  margin: 0 0 0.5rem;
+}
+
+.back-button {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: none;
+  border: none;
+  color: #0969da;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.back-button:hover {
+  background-color: #f6f8fa;
+}
+
+.tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #e1e4e8;
+  padding-bottom: 1rem;
+}
+
+.tab {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  background: none;
+  font-size: 1rem;
+  cursor: pointer;
+  color: #666;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.tab:hover {
+  background-color: #f6f8fa;
+}
+
+.tab.active {
+  color: #0969da;
+  background-color: #f6f8fa;
+  border-bottom: 2px solid #0969da;
+}
+
+.tab-pane {
+  background: white;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* Work History Styles */
+.work-history-container {
+  padding: 1rem 0;
+}
+
+.work-history {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.work-history-card {
+  background: white;
+  border: 1px solid #e1e4e8;
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.work-history-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.work-history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.work-history-header h3 {
+  margin: 0;
+  color: #24292e;
+  font-size: 1.1rem;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  background-color: #f8f9fa;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  border: 1px solid #e1e4e8;
+}
+
+.rating-value {
+  font-weight: 600;
+  margin-right: 0.25rem;
+  font-size: 0.95rem;
+}
+
+.star {
+  color: #ffd700;
+  font-size: 1.1rem;
+}
+
+.freelancer {
+  color: #199999;
+  margin: 0.5rem 0;
+  font-size: 0.95rem;
+}
+
+.review {
+  color: #24292e;
+  line-height: 1.5;
+  margin: 1rem 0;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-left: 3px solid #e1e4e8;
+  padding-left: 1rem;
+  font-style: italic;
+}
+
+.date {
+  color: #6a737d;
+  font-size: 0.85rem;
+  text-align: right;
+  margin-top: 0.5rem;
+}
+
+/* Statistics Styles */
+.statistics-container {
+  padding: 1rem 0;
+}
+
+.stats-section {
+  margin-bottom: 2.5rem;
+}
+
+.stats-section:last-child {
+  margin-bottom: 0;
+}
+
+.stats-section h2 {
+  color: #24292e;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #e1e4e8;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.stat-card {
+  background: #f6f8fa;
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: 1px solid #e1e4e8;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.stat-card h3 {
+  color: #586069;
+  font-size: 0.9rem;
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+}
+
+.stat-card p {
+  color: #24292e;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.trend {
+  background-color: #ffebe9;
+  color: #cf222e;
+}
+
+.trend-icon {
+  font-size: 1rem;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .employer-dashboard {
+    padding: 1rem;
+  }
+  
+  .dashboard-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+  
+  .back-button {
+    position: static;
+    align-self: flex-start;
+  }
+  
+  .tabs {
+    flex-wrap: wrap;
+  }
+  
+  .tab {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}

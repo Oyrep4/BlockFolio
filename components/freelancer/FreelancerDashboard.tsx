@@ -132,14 +132,14 @@ const Ratings = () => {
       review: 'Good quality but lacked communication and updates.'
     },
     { 
-      employer: 'Tony Montana', 
+      employer: 'SoloGigs', 
       rating: 4.5, 
       platform: 'Upwork',
       date: '2025-07-09',
       review: 'Exceptional freelancer, highly recommended!'
     },
     { 
-      employer: 'Micheal Corleone', 
+      employer: 'TestWork', 
       rating: 4.0, 
       platform: 'Freelancer',
       date: '2025-06-27',
@@ -258,7 +258,7 @@ const Statistics = () => {
             },
             { title: 'Jobs Completed', value: '66' },
             { title: 'Completion Rate', value: '95.3%' },
-            { title: 'Aggregate Reputation Score', value: '' }
+            { title: 'Aggregate Reputation Score', value: '698/800' }
           ].map(stat => (
             <div key={`resume-${stat.title}`} className="stat-card">
               <h3>{stat.title}</h3>

@@ -1,12 +1,30 @@
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(1deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 0.9; }
+}
+
 body {
   margin: 0;
-  font-family: 'Open Sans', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', sans-serif;
+  font-family: 'Inter', 'Open Sans', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;
-  color: #333;
+  color: #1a202c;
   line-height: 1.5;
-  background: linear-gradient(135deg, #f6f9fc 0%, #eef2f7 100%);
+  background: linear-gradient(-45deg, #e0f2fe, #dbeafe, #e0e7ff, #f0f9ff);
+  background-size: 400% 400%;
+  animation: gradientShift 12s ease infinite;
   position: relative;
   overflow-x: hidden;
 }
@@ -14,19 +32,33 @@ body {
 body::before {
   content: '';
   position: fixed;
-  top: -50%;
-  left: -50%;
-  right: -50%;
-  bottom: -50%;
-  background: radial-gradient(circle at 70% 30%, rgba(41, 178, 254, 0.1), transparent 30%),
-              radial-gradient(circle at 30% 70%, rgba(47, 180, 90, 0.1), transparent 30%);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 10% 20%, rgba(79, 70, 229, 0.15) 0%, transparent 25%),
+    radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.15) 0%, transparent 25%),
+    radial-gradient(circle at 30% 60%, rgba(139, 92, 246, 0.1) 0%, transparent 30%);
   z-index: -1;
-  animation: rotate 30s linear infinite;
+  pointer-events: none;
+  animation: pulse 18s ease-in-out infinite;
 }
 
-@keyframes rotate {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    linear-gradient(135deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 100%),
+    radial-gradient(circle at 70% 30%, rgba(79, 70, 229, 0.1) 0%, transparent 35%),
+    radial-gradient(circle at 30% 70%, rgba(16, 185, 129, 0.1) 0%, transparent 35%);
+  z-index: -1;
+  pointer-events: none;
+  animation: float 25s ease-in-out infinite;
 }
 
 .app {
@@ -94,66 +126,172 @@ h1::after {
 .buttons-container {
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 1.5rem;
-  margin-top: 2rem;
+  margin: 2rem auto 0;
   flex-wrap: wrap;
   position: relative;
   z-index: 2;
+  width: 100%;
+  max-width: 500px;
+  padding: 0 1rem;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@keyframes slideIn {
+  from { transform: translateX(-100%) skewX(-15deg); }
+  to { transform: translateX(100%) skewX(-15deg); }
+}
+
+@keyframes ripple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
 }
 
 .login-button {
-  padding: 1rem 2.5rem;
+  padding: 1.1rem 2.8rem;
   font-size: 1.1rem;
   border: none;
-  border-radius: 50px;
+  border-radius: 8px;
   cursor: pointer;
   font-weight: 600;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  letter-spacing: 0.5px;
   min-width: 220px;
+  width: 220px;
+  height: 56px;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  text-transform: none;
+  box-sizing: border-box;
+  transform: translateZ(0);
+  will-change: transform, box-shadow;
 }
 
-.login-button::before {
+/* Freelancer Button Specific Styles */
+.login-button.freelancer {
+  background: linear-gradient(135deg, #4a6cf7 0%, #2541b2 100%);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.login-button.freelancer::before {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(rgba(255, 255, 255, 0.2), transparent);
-  transform: translateY(-100%);
-  transition: transform 0.3s ease;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transform: translateX(-100%);
+  transition: 0.5s;
 }
 
-.login-button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+.login-button.freelancer:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+  animation: pulse 2s infinite;
 }
 
-.login-button:hover::before {
-  transform: translateY(0);
+.login-button.freelancer:hover::before {
+  transform: translateX(100%);
+}
+
+/* Employer Button Specific Styles */
+.login-button.employer {
+  background: linear-gradient(135deg, #6f42c1 0%, #4a2d8a 100%);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.login-button.employer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transform: translateX(-100%);
+  transition: 0.5s;
+}
+
+.login-button.employer:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 20px rgba(111, 66, 193, 0.3);
+  animation: pulse 2s infinite;
+}
+
+.login-button.employer:hover::before {
+  transform: translateX(100%);
+}
+
+/* Button Icons */
+.login-button i {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  opacity: 0.9;
+}
+
+.login-button:hover i {
+  transform: translateX(3px);
+  opacity: 1;
 }
 
 .freelancer {
-  background: linear-gradient(45deg, #29b2fe, #0077ff);
+  background: linear-gradient(135deg, #4a6cf7 0%, #2541b2 100%);
   color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .freelancer:hover {
-  background: linear-gradient(45deg, #1a9ce8, #0066cc);
+  background: linear-gradient(135deg, #3a5ce5 0%, #1a33a5 100%);
 }
 
 .employer {
-  background: linear-gradient(45deg, #2fb45a, #1e8a3e);
+  background: linear-gradient(135deg, #6f42c1 0%, #4a2d8a 100%);
   color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .employer:hover {
-  background: linear-gradient(45deg, #2aa04e, #197530);
+  background: linear-gradient(135deg, #5e35b1 0%, #3a1c71 100%);
+}
+
+/* Add icon styles for buttons */
+.login-button i {
+  font-size: 1.2em;
+  transition: transform 0.3s ease;
+}
+
+.login-button:hover i {
+  transform: translateX(3px);
 }
 
 @media (max-width: 768px) {

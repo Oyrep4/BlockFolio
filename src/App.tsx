@@ -1,12 +1,17 @@
 import { useState } from 'react';
 import './App.css';
 import FreelancerDashboard from '../components/freelancer/FreelancerDashboard';
+import EmployerDashboard from '../components/employer/EmployerDashboard';
 
 function App() {
-  const [showFreelancerDashboard, setShowFreelancerDashboard] = useState(false);
+  const [showDashboard, setShowDashboard] = useState<'none' | 'freelancer' | 'employer'>('none');
 
-  if (showFreelancerDashboard) {
-    return <FreelancerDashboard onBack={() => setShowFreelancerDashboard(false)} />;
+  if (showDashboard === 'freelancer') {
+    return <FreelancerDashboard onBack={() => setShowDashboard('none')} />;
+  }
+
+  if (showDashboard === 'employer') {
+    return <EmployerDashboard onBack={() => setShowDashboard('none')} />;
   }
 
   return (
@@ -19,11 +24,18 @@ function App() {
         <div className="buttons-container">
           <button 
             className="login-button freelancer"
-            onClick={() => setShowFreelancerDashboard(true)}
+            onClick={() => setShowDashboard('freelancer')}
           >
+            <i className="fas fa-user-tie"></i>
             Freelancer
           </button>
-          <button className="login-button employer">Employer</button>
+          <button 
+            className="login-button employer"
+            onClick={() => setShowDashboard('employer')}
+          >
+            <i className="fas fa-building"></i>
+            Employer
+          </button>
         </div>
       </main>
     </div>
