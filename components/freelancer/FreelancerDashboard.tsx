@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import RatingSystemImage from '../../src/assets/RatingSystem.png';
 import './FreelancerDashboard.css';
 
 interface FreelancerDashboardProps {
@@ -7,6 +8,7 @@ interface FreelancerDashboardProps {
 
 const FreelancerDashboard: React.FC<FreelancerDashboardProps> = ({ onBack }) => {
   const [activeTab, setActiveTab] = useState('connected');
+  const [showRatingInfo, setShowRatingInfo] = useState(false);
 
   const renderTabContent = () => {
     switch(activeTab) {
@@ -30,16 +32,54 @@ const FreelancerDashboard: React.FC<FreelancerDashboardProps> = ({ onBack }) => 
       </div>
       
       <div className="tabs">
-        {['connected', 'history', 'ratings', 'stats'].map(tab => (
+        {['connected', 'ratings', 'stats'].map(tab => (
           <button
             key={tab}
             className={`tab ${activeTab === tab ? 'active' : ''}`}
             onClick={() => setActiveTab(tab)}
           >
-            {tab.charAt(0).toUpperCase() + tab.slice(1).replace(/([A-Z])/g, ' $1')}
+            {tab === 'connected' && 'Connected Platforms'}
+            {tab === 'ratings' && (
+              <React.Fragment>
+                Ratings
+                <button 
+                  className="tab-info-button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setShowRatingInfo(true);
+                  }}
+                  aria-label="Rating information"
+                >
+                  ?
+                </button>
+              </React.Fragment>
+            )}
+            {tab === 'stats' && 'Statistics'}
           </button>
         ))}
       </div>
+
+      {showRatingInfo && (
+        <div className="modal-overlay" onClick={() => setShowRatingInfo(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="close-button" onClick={() => setShowRatingInfo(false)}>×</button>
+            <img 
+              src={RatingSystemImage} 
+              alt="Rating System Information" 
+              className="rating-info-image" 
+              onLoad={(e) => {
+                // Auto-size the modal to fit the image
+                const img = e.target as HTMLImageElement;
+                const modalContent = img.closest('.modal-content') as HTMLElement | null;
+                if (modalContent) {
+                  modalContent.style.width = `${img.naturalWidth}px`;
+                  modalContent.style.maxWidth = 'none';
+                }
+              }}
+            />
+          </div>
+        </div>
+      )}
 
       <div className="tab-content">{renderTabContent()}</div>
     </div>
@@ -178,43 +218,75 @@ const Ratings = () => {
   );
 };
 
-const Statistics = () => (
-  <div className="tab-pane">
-    <div className="stats-section">
-      <h2>Your Personal Statistics</h2>
-      <div className="stats-grid">
-        {[
-          { title: 'Total Earnings', value: '$0' },
-          { title: 'Jobs Completed', value: '0' },
-          { title: 'Active Jobs', value: '0' },
-          { title: 'Completion Rate', value: '0%' },
-          { title: 'Acceptance Rate', value: '0%' }
-        ].map(stat => (
-          <div key={`personal-${stat.title}`} className="stat-card">
-            <h3>{stat.title}</h3>
-            <p>{stat.value}</p>
-          </div>
-        ))}
-      </div>
-    </div>
+const Statistics = () => {
+  const [showRatingInfo, setShowRatingInfo] = useState(false);
 
-    <div className="stats-section">
-      <h2>Your Blockchain Resume</h2>
-      <div className="stats-grid">
-        {[
-          { title: 'Average Rating', value: '0.0', icon: '★' },
-          { title: 'Jobs Completed', value: '0' },
-          { title: 'Completion Rate', value: '0%' },
-          { title: 'Aggregate Reputation Score', value: '0' }
-        ].map(stat => (
-          <div key={`resume-${stat.title}`} className="stat-card">
-            <h3>{stat.title}</h3>
-            <p>{stat.icon && <span className="stat-icon">{stat.icon} </span>}{stat.value}</p>
-          </div>
-        ))}
+  return (
+    <div className="tab-pane">
+      <div className="stats-section">
+        <h2>Your Personal Statistics</h2>
+        <div className="stats-grid">
+          {[
+            { title: 'Total Earnings', value: '$7,839' },
+            { title: 'Jobs Completed', value: '66' },
+            { title: 'Active Jobs', value: '2' },
+            { title: 'Completion Rate', value: '95.3%' },
+            { title: 'Acceptance Rate', value: '67.0%' }
+          ].map(stat => (
+            <div key={`personal-${stat.title}`} className="stat-card">
+              <h3>{stat.title}</h3>
+              <p>{stat.value}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="stats-section">
+        <h2>Your Blockchain Resume</h2>
+        <div className="stats-grid">
+          {[
+            { 
+              title: 'Average Rating', 
+              value: '4.3', 
+              icon: '★',
+              info: true 
+            },
+            { title: 'Jobs Completed', value: '66' },
+            { title: 'Completion Rate', value: '95.3%' },
+            { title: 'Aggregate Reputation Score', value: '' }
+          ].map(stat => (
+            <div key={`resume-${stat.title}`} className="stat-card">
+              <h3>{stat.title}</h3>
+              <p>
+                {stat.icon && <span className="stat-icon">{stat.icon} </span>}
+                {stat.value}
+                {stat.info && (
+                  <button 
+                    className="info-button" 
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setShowRatingInfo(true);
+                    }}
+                    aria-label="Rating information"
+                  >
+                    <span className="info-icon">?</span>
+                  </button>
+                )}
+              </p>
+              {showRatingInfo && stat.info && (
+                <div className="modal-overlay" onClick={() => setShowRatingInfo(false)}>
+                  <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                    <button className="close-button" onClick={() => setShowRatingInfo(false)}>×</button>
+                    <img src={RatingSystemImage} alt="Rating System Information" className="rating-info-image" />
+                  </div>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default FreelancerDashboard;
