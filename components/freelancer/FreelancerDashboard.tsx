@@ -70,18 +70,63 @@ const WorkHistory = () => (
   </div>
 );
 
-const Ratings = () => (
-  <div className="tab-pane">
-    <h2>Your Ratings</h2>
-    <div className="ratings-container">
-      <div className="overall-rating">
-        <span className="rating-value">0.0</span>
-        <div className="stars">★★★★★</div>
-        <p>No ratings yet</p>
+const Ratings = () => {
+  const ratings = [
+    { employer: 'DevEx', rating: 4.2, platform: 'Upwork' },
+    { employer: 'ReRep', rating: 3.8, platform: 'Fiverr' },
+    { employer: 'Tony Montana', rating: 4.5, platform: 'Upwork' },
+    { employer: 'Micheal Corleone', rating: 4.0, platform: 'Freelancer' },
+    { employer: 'WeHire', rating: 4.3, platform: 'Upwork' },
+    { employer: 'CodeMasters', rating: 3.5, platform: 'Fiverr' },
+    { employer: 'TechGurus', rating: 4.1, platform: 'Freelancer' }
+  ];
+
+  const renderStars = (rating: number) => {
+    const fullStars = Math.floor(rating);
+    const hasHalfStar = rating % 1 >= 0.5;
+    const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+    
+    return (
+      <div className="stars">
+        {'★'.repeat(fullStars)}
+        {hasHalfStar && '½'}
+        {'☆'.repeat(emptyStars)}
+      </div>
+    );
+  };
+
+  return (
+    <div className="tab-pane">
+      <h2>Your Ratings</h2>
+      <div className="ratings-container">
+        <div className="overall-rating">
+          <span className="rating-value">
+            {(
+              ratings.reduce((sum, r) => sum + r.rating, 0) / ratings.length
+            ).toFixed(1)}
+          </span>
+          {renderStars(ratings.reduce((sum, r) => sum + r.rating, 0) / ratings.length)}
+          <p>Based on {ratings.length} reviews</p>
+        </div>
+
+        <div className="ratings-list">
+          {ratings.map((item, index) => (
+            <div key={index} className="rating-item">
+              <div className="rating-header">
+                <h3>{item.employer}</h3>
+                <span className="platform-badge">{item.platform}</span>
+              </div>
+              <div className="rating-details">
+                <span className="rating-value">{item.rating.toFixed(1)}</span>
+                {renderStars(item.rating)}
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 const Statistics = () => (
   <div className="tab-pane">
