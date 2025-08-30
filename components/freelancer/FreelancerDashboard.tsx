@@ -91,10 +91,15 @@ const ConnectedPlatforms = () => (
     <h2>Your Connected Platforms</h2>
     <div className="platforms-grid">
       {['Upwork', 'Fiverr', 'Freelancer.com'].map(platform => (
-        <div key={platform} className="platform-card">
+        <div key={platform} className="platform-card connected">
           <h3>{platform}</h3>
-          <p>Not Connected</p>
-          <button className="connect-btn">Connect</button>
+          <p className="connected-status">
+            <span className="status-dot"></span>
+            Connected
+          </p>
+          <button className="connect-btn" disabled>
+            Connected
+          </button>
         </div>
       ))}
     </div>
