@@ -85,19 +85,39 @@ const Ratings = () => (
 
 const Statistics = () => (
   <div className="tab-pane">
-    <h2>Your Statistics</h2>
-    <div className="stats-grid">
-      {[
-        { title: 'Total Earnings', value: '$0' },
-        { title: 'Jobs Completed', value: '0' },
-        { title: 'Active Jobs', value: '0' },
-        { title: 'Response Rate', value: '0%' }
-      ].map(stat => (
-        <div key={stat.title} className="stat-card">
-          <h3>{stat.title}</h3>
-          <p>{stat.value}</p>
-        </div>
-      ))}
+    <div className="stats-section">
+      <h2>Your Personal Statistics</h2>
+      <div className="stats-grid">
+        {[
+          { title: 'Total Earnings', value: '$0' },
+          { title: 'Jobs Completed', value: '0' },
+          { title: 'Active Jobs', value: '0' },
+          { title: 'Completion Rate', value: '0%' },
+          { title: 'Acceptance Rate', value: '0%' }
+        ].map(stat => (
+          <div key={`personal-${stat.title}`} className="stat-card">
+            <h3>{stat.title}</h3>
+            <p>{stat.value}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div className="stats-section">
+      <h2>Your Blockchain Resume</h2>
+      <div className="stats-grid">
+        {[
+          { title: 'Average Rating', value: '0.0', icon: '★' },
+          { title: 'Jobs Completed', value: '0' },
+          { title: 'Completion Rate', value: '0%' },
+          { title: 'Aggregate Reputation Score', value: '0' }
+        ].map(stat => (
+          <div key={`resume-${stat.title}`} className="stat-card">
+            <h3>{stat.title}</h3>
+            <p>{stat.icon && <span className="stat-icon">{stat.icon} </span>}{stat.value}</p>
+          </div>
+        ))}
+      </div>
     </div>
   </div>
 );
