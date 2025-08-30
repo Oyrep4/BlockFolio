@@ -224,7 +224,6 @@ const Ratings = () => {
 };
 
 const Statistics = () => {
-  const [showRatingInfo, setShowRatingInfo] = useState(false);
 
   return (
     <div className="tab-pane">
@@ -265,27 +264,7 @@ const Statistics = () => {
               <p>
                 {stat.icon && <span className="stat-icon">{stat.icon} </span>}
                 {stat.value}
-                {stat.info && (
-                  <button 
-                    className="info-button" 
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setShowRatingInfo(true);
-                    }}
-                    aria-label="Rating information"
-                  >
-                    <span className="info-icon">?</span>
-                  </button>
-                )}
               </p>
-              {showRatingInfo && stat.info && (
-                <div className="modal-overlay" onClick={() => setShowRatingInfo(false)}>
-                  <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                    <button className="close-button" onClick={() => setShowRatingInfo(false)}>×</button>
-                    <img src={RatingSystemImage} alt="Rating System Information" className="rating-info-image" />
-                  </div>
-                </div>
-              )}
             </div>
           ))}
         </div>
