@@ -72,14 +72,56 @@ const WorkHistory = () => (
 
 const Ratings = () => {
   const ratings = [
-    { employer: 'DevEx', rating: 4.2, platform: 'Upwork' },
-    { employer: 'ReRep', rating: 3.8, platform: 'Fiverr' },
-    { employer: 'Tony Montana', rating: 4.5, platform: 'Upwork' },
-    { employer: 'Micheal Corleone', rating: 4.0, platform: 'Freelancer' },
-    { employer: 'WeHire', rating: 4.3, platform: 'Upwork' },
-    { employer: 'CodeMasters', rating: 3.5, platform: 'Fiverr' },
-    { employer: 'TechGurus', rating: 4.1, platform: 'Freelancer' }
-  ];
+    { 
+      employer: 'DevEx', 
+      rating: 4.2, 
+      platform: 'Upwork',
+      date: '2025-08-22',
+      review: 'Great work, delivered on time!'
+    },
+    { 
+      employer: 'ReRep', 
+      rating: 3.8, 
+      platform: 'Fiverr',
+      date: '2025-07-17',
+      review: 'Good quality but lacked communication and updates.'
+    },
+    { 
+      employer: 'Tony Montana', 
+      rating: 4.5, 
+      platform: 'Upwork',
+      date: '2025-07-09',
+      review: 'Exceptional freelancer, highly recommended!'
+    },
+    { 
+      employer: 'Micheal Corleone', 
+      rating: 4.0, 
+      platform: 'Freelancer',
+      date: '2025-06-27',
+      review: 'Reliable and professional service.'
+    },
+    { 
+      employer: 'WeHire', 
+      rating: 4.3, 
+      platform: 'Upwork',
+      date: '2025-06-24',
+      review: 'Will definitely work with again.'
+    },
+    { 
+      employer: 'CodeMasters', 
+      rating: 3.5, 
+      platform: 'Fiverr',
+      date: '2025-06-22',
+      review: 'Good work, but had some delays.'
+    },
+    { 
+      employer: 'TechGurus', 
+      rating: 4.1, 
+      platform: 'Freelancer',
+      date: '2025-05-12',
+      review: 'Great technical skills and communication.'
+    }
+  ].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()); // Sort by date, newest first
 
   const renderStars = (rating: number) => {
     const fullStars = Math.floor(rating);
@@ -113,12 +155,20 @@ const Ratings = () => {
           {ratings.map((item, index) => (
             <div key={index} className="rating-item">
               <div className="rating-header">
-                <h3>{item.employer}</h3>
+                <div>
+                  <h3>{item.employer}</h3>
+                  <span className="rating-date">{item.date}</span>
+                </div>
                 <span className="platform-badge">{item.platform}</span>
               </div>
               <div className="rating-details">
-                <span className="rating-value">{item.rating.toFixed(1)}</span>
-                {renderStars(item.rating)}
+                <div>
+                  <div className="rating-score">
+                    <span className="rating-value">{item.rating.toFixed(1)}</span>
+                    {renderStars(item.rating)}
+                  </div>
+                  <p className="review-text">"{item.review}"</p>
+                </div>
               </div>
             </div>
           ))}
